@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Natural Grass vs Artificial Turf</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green: #2d6a4f;
+    --green-light: #52b788;
+    --turf: #e07b39;
+    --dark: #0d1b0f;
+    --cream: #f5f0e8;
+    --muted: #5a6b5c;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream); color: #1a2e1c; }
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 99;
+    background: rgba(13,27,15,0.95);
+    display: flex; align-items: center; gap: 1.5rem;
+    padding: 0 5vw; height: 52px;
+  }
+  nav a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+  nav a:hover { color: var(--green-light); }
+  nav .brand { color: white; margin-right: auto; font-family: 'Bebas Neue'; font-size: 1.1rem; letter-spacing: 0.08em; }
+  /* HERO */
+  .hero { background: var(--dark); padding: 5rem 5vw 4rem; }
+  .hero-inner { max-width: 700px; }
+  .eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--green-light); margin-bottom: 1.25rem; }
+  .hero h1 { font-family: 'Bebas Neue'; font-size: clamp(4rem, 9vw, 8rem); line-height: 0.95; color: white; }
+  .hero h1 em { color: var(--turf); font-style: normal; }
+  .hero p { margin-top: 1.5rem; font-size: 1rem; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.75; max-width: 480px; }
+  .hero-tags { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+  .tag { padding: 0.35rem 0.9rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+  .tag.g { background: rgba(82,183,136,0.15); color: var(--green-light); border: 1px solid rgba(82,183,136,0.3); }
+  .tag.t { background: rgba(224,123,57,0.15); color: var(--turf); border: 1px solid rgba(224,123,57,0.3); }
+  /* LAYOUT */
+  .main { max-width: 1100px; margin: 0 auto; padding: 4rem 5vw; }
+  .section-block { margin-bottom: 5rem; }
+  .label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--green); margin-bottom: 0.4rem; display: block; }
+  h2 { font-family: 'Bebas Neue'; font-size: clamp(1.8rem, 3.5vw, 2.6rem); letter-spacing: 0.03em; margin-bottom: 1rem; }
+  h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; color: #1a2e1c; }
+  p { font-size: 0.97rem; color: var(--muted); line-height: 1.8; margin-bottom: 1rem; max-width: 72ch; }
+  p:last-child { margin-bottom: 0; }
+  .divider { border: none; border-top: 1px solid rgba(45,106,79,0.15); margin: 5rem 0; }
+  /* TWO COL */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
+  .card { background: white; border-radius: 10px; padding: 2rem; border-top: 4px solid var(--green); box-shadow: 0 2px 16px rgba(0,0,0,0.05); }
+  .card.orange { border-top-color: var(--turf); }
+  .card h3 { font-size: 1rem; margin-bottom: 1.25rem; }
+  .card ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .card ul li { font-size: 0.9rem; line-height: 1.55; color: var(--muted); padding-left: 1.1rem; position: relative; }
+  .card ul li::before { content: '•'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+  .card.orange ul li::before { color: var(--turf); }
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 2rem 0; }
+  thead tr { background: var(--dark); color: white; }
+  th { padding: 0.85rem 1rem; text-align: left; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  th:nth-child(2) { color: var(--green-light); }
+  th:nth-child(3) { color: var(--turf); }
+  td { padding: 0.8rem 1rem; border-bottom: 1px solid rgba(0,0,0,0.07); color: var(--muted); }
+  td:first-child { font-weight: 600; color: #1a2e1c; }
+  tr:nth-child(even) td { background: rgba(255,255,255,0.6); }
+  /* PULL QUOTE */
+  .pullquote { border-left: 4px solid var(--green-light); padding: 1rem 1.5rem; margin: 2rem 0; background: white; border-radius: 0 8px 8px 0; max-width: 65ch; }
+  .pullquote blockquote { font-size: 1rem; font-style: italic; color: #1a2e1c; line-height: 1.65; margin-bottom: 0.4rem; }
+  .pullquote cite { font-size: 0.72rem; font-weight: 600; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  .pullquote.orange { border-left-color: var(--turf); }
+  /* INJURY CARDS */
+  .injury-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.25rem; margin: 2rem 0; }
+  .inj { background: white; border-radius: 8px; padding: 1.5rem; border-left: 3px solid var(--turf); }
+  .inj h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; color: #1a2e1c; }
+  .badge { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 0.15rem 0.5rem; border-radius: 4px; margin-bottom: 0.6rem; background: rgba(224,123,57,0.12); color: var(--turf); }
+  .inj p { font-size: 0.85rem; line-height: 1.6; color: var(--muted); margin: 0; max-width: none; }
+  /* HEAT BARS */
+  .bars { display: flex; flex-direction: column; gap: 1.25rem; max-width: 600px; margin: 2rem 0; }
+  .bar-row label { display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 600; margin-bottom: 0.4rem; color: #3a4a3c; }
+  .bar-track { height: 8px; background: rgba(0,0,0,0.08); border-radius: 999px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 999px; }
+  .bar-fill.g { background: var(--green-light); }
+  .bar-fill.t { background: var(--turf); }
+  /* QUOTES */
+  .quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin: 2rem 0; }
+  .quote { background: white; border-radius: 10px; padding: 1.5rem; border-left: 4px solid var(--green); }
+  .quote blockquote { font-size: 0.95rem; font-style: italic; color: #333; line-height: 1.65; margin-bottom: 0.75rem; max-width: none; }
+  .source { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  /* CONCLUSION */
+  .conclusion-box { background: var(--dark); border-radius: 12px; padding: 2.5rem; margin-top: 2rem; }
+  .conclusion-box h3 { font-family: 'Bebas Neue'; font-size: 2rem; color: white; margin-bottom: 0.75rem; }
+  .conclusion-box p { color: rgba(255,255,255,0.55); max-width: 65ch; margin-bottom: 1.5rem; }
+  .verdict { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(82,183,136,0.15); border: 1px solid rgba(82,183,136,0.3); border-radius: 999px; padding: 0.75rem 1.75rem; color: var(--green-light); font-weight: 700; font-size: 0.9rem; }
+  /* REFS */
+  .refs { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 1.5rem; }
+  .ref { background: white; border-radius: 8px; padding: 1.1rem 1.25rem; font-size: 0.85rem; line-height: 1.6; color: var(--muted); border: 1px solid rgba(0,0,0,0.07); max-width: none; margin: 0; }
+  .ref a { color: var(--green); text-decoration: none; }
+  .ref a:hover { text-decoration: underline; }
+  footer { background: var(--dark); padding: 2rem 5vw; text-align: center; font-size: 0.78rem; color: rgba(255,255,255,0.25); margin-top: 4rem; }
+  footer span { color: var(--green-light); }
+  @media (max-width: 640px) {
+    .two-col { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 3.5rem; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="#" class="brand">Grass vs Turf</a>
+  <a href="#overview">Overview</a>
+  <a href="#performance">Performance</a>
+  <a href="#injuries">Injuries</a>
+  <a href="#heat">Heat</a>
+  <a href="#youth">Youth</a>
+  <a href="#conclusion">Conclusion</a>
+  <a href="#references">Sources</a>
+</nav>
+<div class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Capstone Research · Oreen Yahya · 2026</p>
+    <h1>Natural<br>Grass <em>vs</em><br>Artificial Turf</h1>
+    <p>How does your playing surface affect athlete performance, injury risk, and long-term health? The research has a clear answer.</p>
+    <div class="hero-tags">
+      <span class="tag g">Natural Grass</span>
+      <span class="tag t">Artificial Turf</span>
+      <span class="tag g">Sports Medicine</span>
+      <span class="tag t">Injury Prevention</span>
+    </div>
+  </div>
+</div>
+<div class="main">
+  <!-- OVERVIEW -->
+  <div class="section-block" id="overview">
+    <span class="label">Introduction</span>
+    <h2>Why the Playing Surface Matters</h2>
+    <p>Playing fields arent thought about that much, until an injury happens. Over the past 20 years, artificial turf has spread quick across high schools, colleges, and professional stadiums. the reason why is straightforward and it's because it doesn't need watering, mowing, or recovery time between games. Stadiums can host more events, schools can maintain it easier, and the surface stays consistent no matter the weather.</p>
+    <p>But as artificial turf has grown in popularity, so have concerns about what it does to the athletes who train and compete on it every day. Medical professionals, researchers, and athletes themselves have increasingly asked questions about injury rates, surface temperature, and long-term joint health. The debate is no longer just about preference, but mainly about saftey.</p>
+    <p>Natural grass is still the surface many elite athletes and sports medicine professionals choose. Even though it requiring more upkeep, it offers things that turf can't copy, like natural cushioning, cooler temperatures, and a surface that ris more forgiving to athletes. This research researchers both surfaces across performance, injury data, heat safety, and long-term athlete development to determine which is better for the people who play on them.</p>
+  </div>
+  <hr class="divider">
+  <!-- PERFORMANCE -->
+  <div class="section-block" id="performance">
+    <span class="label">Side by Side</span>
+    <h2>Performance on Each Surface</h2>
+    <p>The way a surface feels affects how athletes move, how hard they push themselves, and how their bodies hold up over a long season. Natural grass and artificial turf have very different feelings, and those differences add up in ways athletes and coaches notice every day.</p>
+    <p>On natural grass, cleats plant naturally into the soil and release with each step. This means athletes can cut, sprint, and change direction without extra resistance at the ankle or knee. The surface gives slightly more cushion, which absorbs some of the impact that would have traveled straight up through the leg. In a practice or game, that cushioning makes a real difference in how tired an athlete feels.</p>
+    <p>Artificial turf is made to be strong and durable. It holds up through rain, heavy use, and years of play without needing rest. But its firmness means the body absorbs more of the impact with every step. Athletes usually say they feel heavier or fatigued after a long session on turf. Joints are taking more stress, muscles are working harder, and you get hit with fatigue more.</p>
+    <div class="two-col">
+      <div class="card">
+        <h3>Natural Grass Strengths</h3>
+        <ul>
+          <li>Cleats release naturally, reducing joint force</li>
+          <li>Cooler surface lowers dehydration and fatigue</li>
+          <li>Softer ground absorbs impact on knees and ankles</li>
+          <li>Athletes feel more confident committing to movements</li>
+          <li>Built-in rest periods between uses prevent overtraining</li>
+        </ul>
+      </div>
+      <div class="card orange">
+        <h3>Artificial Turf Concerns</h3>
+        <ul>
+          <li>Hard surface increases lower body impact forces</li>
+          <li>Retains extreme heat in sunlight</li>
+          <li>Cleats grip too firmly, raising ACL/MCL tear risk</li>
+          <li>Longer recovery time means athletes feel less ready</li>
+          <li>No rest periods needed and overexposure is a real risk</li>
+        </ul>
+      </div>
+    </div>
+    <p>There's also a psychological side to surface performance that's easy to not think about. When athletes trust the ground they're playing on, they commit fully, like planting hard, sliding without hesitation and jumping and landing. On turf, some athletes hold back. The fear of a cleat catching, a knee rolling, or a turf burn from a slide causes little hesitation that builds up across an entire game or season. That hesitation, even even just a second, can be the difference between a good play and a missed opportunity or a poorly made movement that leads to injury.</p>
+    <div class="pullquote">
+      <blockquote>"Natural grass has better shock-absorbing qualities and playing feel, which may reduce fatigue during physical performance."</blockquote>
+      <cite>CCGrass, 2023</cite>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Feature</th><th>Natural Grass</th><th>Artificial Turf</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Surface Feel</td><td>Softer, more forgiving</td><td>Firmer, harder</td></tr>
+        <tr><td>Heat Retention</td><td>Stays near air temperature</td><td>Can become too hot</td></tr>
+        <tr><td>Injury Risk</td><td>Lower non-contact risk</td><td>Higher joint stress</td></tr>
+        <tr><td>Maintenance</td><td>High (watering, mowing)</td><td>Low (durable, all-weather)</td></tr>
+        <tr><td>Athlete Confidence</td><td>More confident, less hesitation</td><td>Some athletes hold back</td></tr>
+        <tr><td>Recovery Time</td><td>Faster return to training</td><td>Longer due to fatigue</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <hr class="divider">
+  <!-- INJURIES -->
+  <div class="section-block" id="injuries">
+    <span class="label">Health Risks</span>
+    <h2>Injury Rates & Types</h2>
+    <p>Injury data is where the debate between grass and turf becomes most serious. A 2024 study published in the <em>Orthopaedic Journal of Sports Medicine</em> researched injury rates across NFL games played on both surfaces and found higher rates of lower-body injuries and season-ending surgeries on artificial turf compared to natural grass. The findings were consistent enough to raise a lot of concern in sports medicine professionals.</p>
+    <p>The most common and serious injuries connected to artificial turf are non-contact knee injuries. Specifically ACL and MCL tears. These happen when a cleat grips the turf too firmly during a cut or rotation. On natural grass, the cleat would give way slightly as the foot pivots but on turf, it doesn't. The foot stays locked while the body keeps turning, and the ligament absorbs the full force of that movement. The result can be a season-ending surgery and months of recovery.</p>
+    <div class="injury-grid">
+      <div class="inj">
+        <div class="badge">Higher risk on turf</div>
+        <h4>ACL / MCL Tears</h4>
+        <p>When cleats grip turf too firmly, the foot stays planted while the body rotates which creates a lot of pressure on the knee. Natural grass releases the cleat more easily.</p>
+      </div>
+      <div class="inj">
+        <div class="badge">Higher risk on turf</div>
+        <h4>Ankle Sprains</h4>
+        <p>Extra traction on turf increases ankle sprain risk, which leads to missed games and long recovery periods that mess up an athlete's season.</p>
+      </div>
+      <div class="inj">
+        <div class="badge">Chronic on turf</div>
+        <h4>Overuse Injuries</h4>
+        <p>Turf's hardness increases added up impact over a full season, leading to chronic pain and reduced performance. Especially for young, developing athletes.</p>
+      </div>
+      <div class="inj">
+        <div class="badge">Turf-specific</div>
+        <h4>Turf Burns</h4>
+        <p>Slides and falls on artificial turf cause friction burns that are rare on natural grass, carrying infection risk and time missed from practice.</p>
+      </div>
+    </div>
+    <p>apart from little injuries, turf's hard surface contributes to overuse injuries that develop slowly over time. The repeated impact of training on a firm surface stresses tendons, joints, and bones in ways that softer surfaces don't. Athletes who train mainly on turf often say they have more chronic knee and shin pain, especially in longer seasons with back to back games and practices.</p>
+    <div class="pullquote orange">
+      <blockquote>"Natural grass may lower non-contact injuries as it allows easy release with each athletic movement."</blockquote>
+      <cite>Mass General Brigham, 2022</cite>
+    </div>
+    <p>Turf burns which are injuries caused by sliding or falling on the artificial turf, are another injury type that almost only happenns to artificial turf. While they may seem little, turf burns carry a  risk of infection and often require time away from practice. For athletes who spend long hours on the field, these injuries are a consistent and frustrating part of playing on turf.</p>
+  </div>
+  <hr class="divider">
+  <!-- HEAT -->
+  <div class="section-block" id="heat">
+    <span class="label">Environmental Safety</span>
+    <h2>Heat Retention & Hazards</h2>
+    <p>One of the most underrated dangers of artificial turf is heat. Unlike natural grass, which stays close to the air temperature, artificial turf absorbs and holds heat from the sun. On a warm day, turf surface temperatures can be over the air temperature by 40°F or more which turns turning a 90°F day into a surface that feels like 130°F under your foot.</p>
+    <p>The Mount Sinai Exposomics Institute (2025) released a statement specifically addressing this issue, which links high artificial turf temperatures to heat exhaustion, heat strokes, and dehydration. With particular concern for younger athletes whose bodies are less equipped to manage heat stress. Coaches and trainers at schools and youth clubs regularly deal with the consequences of shortened practices, mandatory water breaks, and athletes who just can't perform at full intensity because the ground is too hot.</p>
+    <div class="bars">
+      <div class="bar-row">
+        <label><span>Heat Retention — Natural Grass</span><span style="color:var(--green)">Low</span></label>
+        <div class="bar-track"><div class="bar-fill g" style="width:20%"></div></div>
+      </div>
+      <div class="bar-row">
+        <label><span>Heat Retention — Artificial Turf</span><span style="color:var(--turf)">Very High</span></label>
+        <div class="bar-track"><div class="bar-fill t" style="width:92%"></div></div>
+      </div>
+      <div class="bar-row">
+        <label><span>Burn Risk — Natural Grass</span><span style="color:var(--green)">Very Low</span></label>
+        <div class="bar-track"><div class="bar-fill g" style="width:8%"></div></div>
+      </div>
+      <div class="bar-row">
+        <label><span>Burn Risk — Artificial Turf</span><span style="color:var(--turf)">Moderate–High</span></label>
+        <div class="bar-track"><div class="bar-fill t" style="width:68%"></div></div>
+      </div>
+      <div class="bar-row">
+        <label><span>Dehydration Risk — Natural Grass</span><span style="color:var(--green)">Standard</span></label>
+        <div class="bar-track"><div class="bar-fill g" style="width:28%"></div></div>
+      </div>
+      <div class="bar-row">
+        <label><span>Dehydration Risk — Artificial Turf</span><span style="color:var(--turf)">Elevated</span></label>
+        <div class="bar-track"><div class="bar-fill t" style="width:76%"></div></div>
+      </div>
+    </div>
+    <p>Natural grass also gives natural benefits that contribute to a cooler playing environment. Grass absorbs rainfall, produces oxygen, and cools the area. A well-maintained grass field doesn't just feel cooler, it actually is cooler, and that difference has a big impact on athlete safety and performance during play during warm weather.</p>
+    <p>The heat issue is also connected with recovery. Athletes who practice or compete on a hot turf surface put more energy managing body temperature, which leaves them more fatigued heading into the next session. Over a long season, this fatigue can affect performance, decision-making, and injury risk and even on days when the surface temperature itself isn't dangerous.</p>
+  </div>
+  <hr class="divider">
+  <!-- YOUTH -->
+  <div class="section-block" id="youth">
+    <span class="label">Development</span>
+    <h2>Youth & High School Athlete Safety</h2>
+    <p>This matters a lot for young athletes. Unlike professionals who have fully developed bodies, support staff, and resources for recovery, youth and high school athletes are still growing. Injuries given during this growth can have problems that last far longer than a single season. It affects the boneand joint health.</p>
+    <p>Medical professionals at Mass General Brigham (2022) have highlighted the importance of safer playing surfaces for grassroots sports. Young athletes playing on hard artificial turf are exposed to the same impact forces and heat risks as professionals, but with way less physical ability and less resources for managing those risks.</p>
+    <p>There's also a training load concern with artificial turf. Because turf fields require no recovery time, multiple teams can share the same field quickly. This means young athletes may be practicing or competing on back to back days without the surface ever resting and without their bodies ever fully recovering. On natural grass fields, the surface stops overuse. </p>
+    <p>Playing on hard surafces early can also normalize pain in ways that are harmful long term. Young athletes who train regularly through joint soreness and might develop a habit of ignoring warning signs that actually matter. Teaching athletes to listen to their bodies and respect recovery starts with the environment they train in.</p>
+  </div>
+  <hr class="divider">
+  <!-- QUOTES -->
+  <div class="section-block">
+    <span class="label">Expert Perspectives</span>
+    <h2>What the Research Says</h2>
+    <p>Sports medicine researchers, medical institutions, and turf analysts have all given their point on grass vs. turf. Their findings consistently point toward natural grass as the healthier option for athletes but they still acknowledge some advantages of turf in some settings.</p>
+    <div class="quotes">
+      <div class="quote">
+        <blockquote>"Natural grass may lower non-contact injuries as it allows easy release with each athletic movement."</blockquote>
+        <div class="source">Mass General Brigham, 2022</div>
+      </div>
+      <div class="quote">
+        <blockquote>"High surface temperatures on artificial turf can lead to heat exhaustion, heat strokes, and dehydration in young players."</blockquote>
+        <div class="source">Mount Sinai Exposomics Institute, 2025</div>
+      </div>
+      <div class="quote">
+        <blockquote>"Natural grass has better shock-absorbing qualities and playing feel, which may reduce fatigue during physical performance."</blockquote>
+        <div class="source">CCGrass, 2023</div>
+      </div>
+    </div>
+  </div>
+  <hr class="divider">
+  <!-- CONCLUSION -->
+  <div class="section-block" id="conclusion">
+    <span class="label">Ultimately</span>
+    <h2>Natural Grass Is Better for Athletes</h2>
+    <p>The comparison between natural grass and artificial turf comes down to a  question. What do we value most in a playing surface? If you want durability, low maintenance, and weather-proof, turf has better advantages. But if you want athlete health and saftey then natural grass wins on almost every thing.</p>
+    <p>Grass reduces non contact injury risk, provides a cooler and more forgiving playing surface, supports faster recovery, and gives athletes the confidence to perform without any problem. Where it's possible to maintain natural grass, that investment pays off in the health and performance of the athletes who use it.</p>
+    <div class="conclusion-box">
+      <h3>The Bottom Line</h3>
+      <p>Natural grass is consistently better than artificial turf for athlete health and long term improvement. While turf gives durability and low maintenance, the costs, higher injury rates, extreme heat, and fatigue makes it lean towards grass as the safer, healthier surface.</p>
+      <div class="verdict">Recommended: Natural Grass for Athlete Health & Safety</div>
+    </div>
+  </div>
+  <hr class="divider">
+  <!-- REFERENCES -->
+  <div class="section-block" id="references">
+    <span class="label">Academic Sources</span>
+    <h2>References</h2>
+    <div class="refs">
+      <div class="ref">Anderson, B. E., et al. (2024). Lower extremity injury rates on artificial turf versus natural grass in the NFL. <em>Orthopaedic Journal of Sports Medicine, 12</em>(2). <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11363235/" target="_blank">pmc.ncbi.nlm.nih.gov</a></div>
+      <div class="ref">CCGrass. (2023). Artificial grass vs. natural grass: Pros and cons. <a href="https://www.ccgrass.com/artificial-grass-vs-natural-grass-pros-and-cons/" target="_blank">ccgrass.com</a></div>
+      <div class="ref">Mass General Brigham. (2022). Turf vs. grass fields: Sports injury prevention. <a href="https://www.massgeneralbrigham.org/en/about/newsroom/articles/turf-vs-grass-fields-sports-injury-prevention" target="_blank">massgeneralbrigham.org</a></div>
+      <div class="ref">Mount Sinai Exposomics Institute. (2025). Position statement on the use of artificial turf surfaces. <a href="https://mountsinaiexposomics.org/position-statement-on-the-use-of-artificial-turf-surfaces/" target="_blank">mountsinaiexposomics.org</a></div>
+      <div class="ref">ProGreen. (2023). Grass vs. turf in sports: What's actually better? <a href="https://progreen.com/grass-vs-turf-in-sports-whats-actually-better/" target="_blank">progreen.com</a></div>
+    </div>
+  </div>
+</div>
+<footer>
+  <p>Capstone Paper by <span>Oreen Yahya</span> · CSLA · Mr. Cole · December 2026</p>
+</footer>
+</body>
+</html>
